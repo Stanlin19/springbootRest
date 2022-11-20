@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserService implements IUserService {
+public class UserService implements IUserService, UserDetailsService {
 
     @Autowired
     private IUsersDao dao;
@@ -38,6 +38,15 @@ public class UserService implements IUserService {
     @Override
     public Usuario getUserByMail(String mail) {
         return dao.findOneByMail(mail);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Usuario us = dao.findOneByUserName(username);
+        List<GrantedAuthority> roles = new ArrayList<>();
+        roles.add(new SimpleGrantedAuthority(us.getRol().getName()));
+        UserDetails user = new User(us.getUserName(), us.getPassword(), roles);
+        return user;
     }
 
 }
