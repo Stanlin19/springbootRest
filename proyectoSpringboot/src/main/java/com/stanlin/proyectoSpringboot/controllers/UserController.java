@@ -2,7 +2,6 @@ package com.stanlin.proyectoSpringboot.controllers;
 
 import com.stanlin.proyectoSpringboot.models.Usuario;
 import com.stanlin.proyectoSpringboot.services.IUserService;
-import org.apache.catalina.filters.ExpiresFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
